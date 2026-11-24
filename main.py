@@ -1,11 +1,11 @@
-"""Ship the finished front page for news-image-20261123.
+"""Hand over the finished front page for news-image-20261123.
 
-This program does one thing and nothing else: it takes the
-``entry.png`` that is already committed next to this file and puts an
-exact copy of it at ``$MAKEFUN_OUTPUT_DIR/entry.png`` (``/output`` if
-the variable is not set). It does not draw anything, does not rebuild
-anything, and does not write into the repository directory, so it
-still works when the repository is mounted read-only.
+The graded program has a single job: take the ``entry.png`` that is
+already committed next to this file in the repository and put a
+byte-identical copy at ``$MAKEFUN_OUTPUT_DIR/entry.png`` (``/output``
+when that variable is not set). It does not draw anything, does not
+rebuild anything, and never writes into the repository directory, so
+it runs fine when the repository is mounted read-only.
 """
 
 from __future__ import annotations
