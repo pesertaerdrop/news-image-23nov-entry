@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Entry point: copy the pre-built entry.png to the output dir.
+"""Hand the finished front page to the grader.
 
-This program does NOT draw anything. It only copies the committed
-entry.png into MAKEFUN_OUTPUT_DIR, so it runs cleanly even when the
-repository is mounted read-only.
+The picture is already drawn and committed as entry.png. This script
+does not draw anything: it only takes that file from this repository
+and copies it into the directory the grader names with the
+MAKEFUN_OUTPUT_DIR environment variable. Copying is all it does, so
+it still runs when the repository is mounted read-only.
 """
 from __future__ import annotations
 
@@ -12,16 +14,16 @@ import shutil
 import sys
 
 
-def main() -> int:
-    here = os.path.dirname(os.path.abspath(__file__))
-    source = os.path.join(here, "entry.png")
+def deliver() -> int:
+    repo_dir = os.path.dirname(os.path.abspath(__file__))
+    picture = os.path.join(repo_dir, "entry.png")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     target = os.path.join(out_dir, "entry.png")
-    shutil.copyfile(source, target)
+    shutil.copyfile(picture, target)
     print("delivered %s" % target)
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(deliver())

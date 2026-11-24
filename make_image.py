@@ -281,15 +281,16 @@ STATS = [
     ("$61,327", "Bitcoin closes Monday"),
     ("4-0", "Liverpool beat Man Utd"),
 ]
-# (name, stories, colour, width px) — widths add up to 1000.
+# Region bar segments: (label, story count, bar colour, width in px).
+# The seven widths add up to 1000, the page width between the margins.
 REGIONS = [
-    ("EUROPE", 8, (30, 80, 160), 210),
-    ("MIDDLE EAST", 4, (150, 60, 60), 105),
-    ("AMERICAS", 6, (180, 140, 40), 158),
-    ("ASIA-PACIFIC", 10, (40, 130, 80), 262),
-    ("AFRICA", 4, (160, 120, 50), 105),
-    ("OCEANIA", 1, (60, 140, 140), 80),
-    ("WORLD", 2, (117, 117, 117), 80),
+    ("EUROPE", 8, (30, 80, 160), 210),  # Europe: 8 stories
+    ("MIDDLE EAST", 4, (150, 60, 60), 105),  # Middle East: 4 stories
+    ("AMERICAS", 6, (180, 140, 40), 158),  # Americas: 6 stories
+    ("ASIA-PACIFIC", 10, (40, 130, 80), 262),  # Asia-Pacific: 10 stories
+    ("AFRICA", 4, (160, 120, 50), 105),  # Africa: 4 stories
+    ("OCEANIA", 1, (60, 140, 140), 80),  # Oceania: 1 story
+    ("WORLD", 2, (117, 117, 117), 80),  # World: 2 stories
 ]
 # (title bar, kicker, head, sub, art kind)
 HEROES = [
@@ -305,8 +306,8 @@ HEROES = [
         "WARSHIP SUNK",
         "2 BENGHAZI, LIBYA \u00b7 WAR",
         "Ukraine sinks Russian warship off Libya",
-        "Seven sea drones hit the corvette Merkury in port; "
-        "a Ka-27 destroyed, Angara hit.",
+        "Seven sea drones hit the corvette Merkury in port; "  # seven drones strike
+        "a Ka-27 destroyed, Angara hit.",  # Ka-27 down, Angara hit
         "warship",
     ),
     (
@@ -361,7 +362,7 @@ SMALLS = [
     (
         "SANCTIONS 22",
         "9 BRUSSELS \u00b7 DIPLOMACY",
-        "EU proposes 22nd Russia sanctions",
+        "EU proposes 22nd Russia sanctions",  # 22nd sanctions package
         "Banks, crypto and sport targeted; von der Leyen unveils "
         "the plan. (The Brief)",
         "sanctions",
@@ -369,7 +370,7 @@ SMALLS = [
     (
         "IRAN SANCTIONS",
         "10 WASHINGTON \u00b7 DIPLOMACY",
-        "US sanctions 20+ Iran shadow banks",
+        "US sanctions 20+ Iran shadow banks",  # shadow-banking crackdown
         "Iran\u2019s shadow banking. (Treasury)",
         "iran",
     ),
@@ -392,7 +393,7 @@ SMALLS = [
     (
         "DRONES HIT UN SITE",
         "13 KHARTOUM \u00b7 WAR",
-        "Drones hit homes, UN building in Khartoum",
+        "Drones hit homes, UN building in Khartoum",  # Khartoum strikes
         "Residential areas and a UN building struck in Sudan\u2019s "
         "capital. (Reports)",
         "un2",
@@ -404,18 +405,18 @@ ALSO = [
     (15, "Europe", "London police seize 893kg cocaine"),
     (16, "Middle East", "Eisenkot condemns settler arson"),
     (17, "Middle East", "Houthis hit Taiz, 2 killed, 8 hurt"),
-    (18, "Middle East", "US targets Iran proxy networks"),
+    (18, "Middle East", "US targets Iran proxy networks"),  # story 18
     (19, "Americas", "Gomez to resign from Congress"),
-    (20, "Americas", "Carney, Trump double on stage"),
-    (21, "Americas", "US Army to detonate bomb in Iowa"),
+    (20, "Americas", "Carney, Trump double on stage"),  # story 20
+    (21, "Americas", "US Army to detonate bomb in Iowa"),  # story 21
     (22, "Americas", "C\u00facuta drone attack injures 3"),
     (23, "Asia-Pacific", "India gives $1.62bn to Nepal"),
-    (24, "Asia-Pacific", "Korea minister quits in scandal"),
+    (24, "Asia-Pacific", "Korea minister quits in scandal"),  # story 24
     (25, "Asia-Pacific", "Thai court halves royal-insult term"),
     (26, "Asia-Pacific", "Prabowo to name VP candidates"),
     (27, "Asia-Pacific", "Asian tech shares fall further"),
     (28, "Asia-Pacific", "SK hynix shares rise 20%"),
-    (29, "Asia-Pacific", "China agrees AI talks mechanism"),
+    (29, "Asia-Pacific", "China agrees AI talks mechanism"),  # story 29
     (30, "Asia-Pacific", "Bangladesh to arrest Hasina"),
     (31, "Asia-Pacific", "US to blacklist Megaspeed"),
     (32, "Africa", "Nigeria boat rescue under way"),
@@ -720,9 +721,9 @@ def draw_smalls(d):
     for row in range(2):
         ty = 373 if row == 0 else 521
         ay = 393 if row == 0 else 541
-        ky = 457 if row == 0 else 605
-        hy = 470 if row == 0 else 618
-        sy = 501 if row == 0 else 649
+        ky = (457, 605)[row]  # kicker y: row 0 / row 1
+        hy = (470, 618)[row]  # head y: row 0 / row 1
+        sy = (501, 649)[row]  # sub y: row 0 / row 1
         for col in range(5):
             idx = row * 5 + col
             title, kicker, head, sub, kind = SMALLS[idx]
@@ -735,7 +736,7 @@ def draw_smalls(d):
             lines = fit(d, head, f_head, w, 2, "small head")
             draw_lines(d, lines, x0, hy, f_head, INK, 16)
             lines = fit(d, sub, f_sub, w, 2, "small sub")
-            draw_lines(d, lines, x0, sy, f_sub, INK, 10)
+            draw_lines(d, lines, x0, sy, f_sub, INK, 10)  # 10px between sub lines
 
 
 def draw_map(d, img):
