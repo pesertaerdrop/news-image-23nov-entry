@@ -1,13 +1,10 @@
-"""Hand over the finished front page for news-image-20261123.
+"""Deliver the committed front page to the grader's output folder.
 
-The graded program has a single job: take the ``entry.png`` that is
-already committed next to this file in the repository and put a
-byte-identical copy at ``$MAKEFUN_OUTPUT_DIR/entry.png`` (``/output``
-when that variable is not set). It does not draw anything, does not
-rebuild anything, and never writes into the repository directory, so
-it runs fine when the repository is mounted read-only.
+This is the graded program. It does one thing: copy the entry image
+that already lives in this repo into MAKEFUN_OUTPUT_DIR. It never
+builds anything, never imports the builder, and never writes into
+this repo, so it runs fine even when the repo is mounted read-only.
 """
-
 from __future__ import annotations
 
 import os
@@ -22,7 +19,7 @@ def main() -> int:
     os.makedirs(out_dir, exist_ok=True)
     target = os.path.join(out_dir, "entry.png")
     shutil.copyfile(source, target)
-    print(f"delivered {target}")
+    print("delivered", target)
     return 0
 
 
