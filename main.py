@@ -1,9 +1,9 @@
-"""Deliver the committed front page to the grader's output folder.
+#!/usr/bin/env python3
+"""Entry point: copy the pre-built entry.png to the output dir.
 
-This is the graded program. It does one thing: copy the entry image
-that already lives in this repo into MAKEFUN_OUTPUT_DIR. It never
-builds anything, never imports the builder, and never writes into
-this repo, so it runs fine even when the repo is mounted read-only.
+This program does NOT draw anything. It only copies the committed
+entry.png into MAKEFUN_OUTPUT_DIR, so it runs cleanly even when the
+repository is mounted read-only.
 """
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ def main() -> int:
     os.makedirs(out_dir, exist_ok=True)
     target = os.path.join(out_dir, "entry.png")
     shutil.copyfile(source, target)
-    print("delivered", target)
+    print("delivered %s" % target)
     return 0
 
 
